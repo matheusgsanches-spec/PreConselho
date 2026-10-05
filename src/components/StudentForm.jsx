@@ -52,7 +52,7 @@ export default function StudentForm({ data, onSubmit }) {
         {data.questions.length ? <div className="dynamic-questions">{data.questions.map((question) => question.type === 'choice' ? (
           <fieldset className="question" key={question.id}><legend>{question.prompt}{question.required && <span className="required-mark"> *</span>}</legend><div className="rating-options">{question.options.map((option, index) => <label className="rating" key={`${question.id}-${option}`}><input type="radio" name={`answer-${question.id}`} value={option} required={question.required} /><span className="face">{['★', '●', '◐', '?'][index % 4]}</span><span>{option}</span></label>)}</div></fieldset>
         ) : <label className="field dynamic-text" key={question.id}>{question.prompt}{question.required && <span className="required-mark"> *</span>}<textarea name={`answer-${question.id}`} rows="3" maxLength="1000" required={question.required} placeholder="Escreva sua resposta..." /></label>)}</div> : <div className="empty-state">Ainda não há perguntas disponíveis.</div>}
-        <div className="form-footer"><p>Suas respostas serão compartilhadas com a equipe pedagógica.</p><button className="button primary" type="submit" disabled={!data.questions.length}>Enviar respostas <span aria-hidden="true">→</span></button></div>
+        <div className="form-footer"><button className="button primary" type="submit" disabled={!data.questions.length}>Enviar respostas <span aria-hidden="true">→</span></button></div>
       </form>
     </div>
   );

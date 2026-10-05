@@ -13,7 +13,6 @@ function AdminWorkspace({ user, onLogout }) {
       <div className="admin-user"><span>{user.email}</span><button className="button secondary small-button" onClick={onLogout}>Sair</button></div>
     </header>
     <main><section className="view"><AdminPanel data={data} actions={actions} />{error && <div className="notice show admin-error">{error}</div>}</section></main>
-    <footer><span className="footer-brand">SENAI</span><span>Gestão do Pré-Conselho · {new Date().getFullYear()}</span><span>Área administrativa</span></footer>
   </>;
 }
 

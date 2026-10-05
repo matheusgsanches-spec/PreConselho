@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { onValue, push, ref, remove, set } from 'firebase/database';
 import { db, firebaseConfigured } from './firebase.js';
-import { initialData, makeId, readData, STORAGE_KEY, downloadResponses } from './data.js';
+import { initialData, makeId, normalizeShifts, readData, STORAGE_KEY, downloadResponses } from './data.js';
 
 function normalizeCollection(snapshot) {
   const value = snapshot.val() ?? {};
@@ -26,7 +26,9 @@ export function useSharedData(enabled = true) {
       (snapshot) => setData((current) => {
         const value = name === 'questions' && !snapshot.exists()
           ? initialData.questions
-          : normalizeCollection(snapshot);
+          : name === 'shifts'
+            ? normalizeShifts(normalizeCollection(snapshot))
+            : normalizeCollection(snapshot);
         if (name === 'questions') value.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
         return { ...current, [name]: value };
       }),
@@ -54,11 +56,6 @@ export function useSharedData(enabled = true) {
         if (!clean || data.courses.some((item) => item.name.toLocaleLowerCase('pt-BR') === clean.toLocaleLowerCase('pt-BR'))) return false;
         await persistAdd('courses', { name: clean }); return true;
       },
-      addShift: async (name) => {
-        const clean = name.trim();
-        if (!clean || data.shifts.some((item) => item.name.toLocaleLowerCase('pt-BR') === clean.toLocaleLowerCase('pt-BR'))) return false;
-        await persistAdd('shifts', { name: clean }); return true;
-      },
       addTeacher: async (name, courseId, shiftId) => {
         const clean = name.trim();
         if (!clean || !data.courses.some((item) => item.id === courseId) || !data.shifts.some((item) => item.id === shiftId)) return false;
@@ -78,11 +75,6 @@ export function useSharedData(enabled = true) {
         const linked = data.teachers.filter((teacher) => teacher.courseId === id);
         await Promise.all(linked.map((teacher) => persistDelete('teachers', teacher.id)));
         await persistDelete('courses', id);
-      },
-      removeShift: async (id) => {
-        const linked = data.teachers.filter((teacher) => teacher.shiftId === id);
-        await Promise.all(linked.map((teacher) => persistDelete('teachers', teacher.id)));
-        await persistDelete('shifts', id);
       },
       removeTeacher: (id) => persistDelete('teachers', id),
       addResponse: async (response) => {

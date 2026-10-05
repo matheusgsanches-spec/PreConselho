@@ -7,9 +7,9 @@ export const initialData = {
     { id: 'c3', name: 'Técnico em Eletrotécnica' },
   ],
   shifts: [
-    { id: 's1', name: 'Matutino' },
-    { id: 's2', name: 'Vespertino' },
-    { id: 's3', name: 'Noturno' },
+    { id: 's1', name: 'Manhã' },
+    { id: 's2', name: 'Tarde' },
+    { id: 's3', name: 'Noite' },
   ],
   teachers: [
     { id: 't1', name: 'Ana Paula Martins', courseId: 'c1', shiftId: 's1' },
@@ -26,11 +26,25 @@ export const initialData = {
   responses: [],
 };
 
+const standardShifts = [
+  { id: 's1', name: 'Manhã', aliases: ['manha', 'matutino', 'matutina'] },
+  { id: 's2', name: 'Tarde', aliases: ['tarde', 'vespertino', 'vespertina'] },
+  { id: 's3', name: 'Noite', aliases: ['noite', 'noturno', 'noturna'] },
+];
+
+export function normalizeShifts(shifts = []) {
+  const normalize = (value) => String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLocaleLowerCase('pt-BR');
+  return standardShifts.map((standard) => {
+    const existing = shifts.find((shift) => standard.aliases.includes(normalize(shift.name)));
+    return { id: existing?.id ?? standard.id, name: standard.name };
+  });
+}
+
 export function readData() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (saved && ['courses', 'shifts', 'teachers', 'responses'].every((key) => Array.isArray(saved[key]))) {
-      return { ...structuredClone(initialData), ...saved, questions: Array.isArray(saved.questions) ? saved.questions : structuredClone(initialData.questions) };
+      return { ...structuredClone(initialData), ...saved, shifts: normalizeShifts(saved.shifts), questions: Array.isArray(saved.questions) ? saved.questions : structuredClone(initialData.questions) };
     }
   } catch {
     // Dados ausentes ou inválidos: inicia com os exemplos locais.

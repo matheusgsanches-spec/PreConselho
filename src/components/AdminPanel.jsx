@@ -15,7 +15,6 @@ function Empty({ children }) {
 
 export default function AdminPanel({ data, actions }) {
   const [courseName, setCourseName] = useState('');
-  const [shiftName, setShiftName] = useState('');
   const [teacherName, setTeacherName] = useState('');
   const [courseId, setCourseId] = useState('');
   const [shiftId, setShiftId] = useState('');
@@ -45,12 +44,6 @@ export default function AdminPanel({ data, actions }) {
     catch { return announce('Não foi possível salvar o curso. Confira as permissões do Firebase.'); }
     setCourseName(''); announce('Curso adicionado.');
   }
-  async function addShift(event) {
-    event.preventDefault();
-    try { if (!await actions.addShift(shiftName)) return announce('Esse turno já está cadastrado.'); }
-    catch { return announce('Não foi possível salvar o turno. Confira as permissões do Firebase.'); }
-    setShiftName(''); announce('Turno adicionado.');
-  }
   async function addTeacher(event) {
     event.preventDefault();
     let result;
@@ -70,9 +63,8 @@ export default function AdminPanel({ data, actions }) {
           <section className="admin-card">
             <div className="card-title"><div><span className="eyebrow">ESTRUTURA</span><h2>Cursos e turnos</h2></div><span className="card-icon">＋</span></div>
             <form className="compact-form" onSubmit={addCourse}><Field label="Nome do curso"><input value={courseName} onChange={(event) => setCourseName(event.target.value)} required maxLength="100" placeholder="Ex.: Técnico em Desenvolvimento de Sistemas" /></Field><button className="button primary" type="submit">Adicionar curso</button></form>
-            <form className="compact-form inline-form" onSubmit={addShift}><Field label="Novo turno"><input value={shiftName} onChange={(event) => setShiftName(event.target.value)} required maxLength="40" placeholder="Ex.: Matutino" /></Field><button className="button secondary" type="submit">Adicionar</button></form>
             <div className="item-list catalog-scroll-list">{data.courses.length ? data.courses.map((course) => <div className="list-item" key={course.id}><div className="item-main">{course.name}</div><button className="icon-button" type="button" onClick={async () => { try { await actions.removeCourse(course.id); announce('Curso e vínculos removidos.'); } catch { announce('Não foi possível remover o curso.'); } }}>Remover ×</button></div>) : <Empty>Nenhum curso cadastrado.</Empty>}</div>
-            <div className="chip-list">{data.shifts.map((shift) => <span className="chip" key={shift.id}>{shift.name}<button type="button" onClick={async () => { try { await actions.removeShift(shift.id); announce('Turno e vínculos removidos.'); } catch { announce('Não foi possível remover o turno.'); } }} aria-label={`Remover turno ${shift.name}`}>×</button></span>)}</div>
+            <div className="chip-list">{data.shifts.map((shift) => <span className="chip" key={shift.id}>{shift.name}</span>)}</div>
           </section>
           <section className="admin-card">
             <div className="card-title"><div><span className="eyebrow">EQUIPE DOCENTE</span><h2>Vincular professor</h2></div><span className="card-icon blue">↗</span></div>
@@ -90,7 +82,6 @@ export default function AdminPanel({ data, actions }) {
           <div className="responses-filter"><label className="field">Turma / curso<select value={responseCourseId} required onChange={(event) => { setResponseCourseId(event.target.value); setResponseShiftId(''); setResponseTeacherId(''); }}><option value="">Selecione uma turma</option>{data.courses.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label><label className="field">Turno<select value={responseShiftId} required disabled={!responseCourseId} onChange={(event) => { setResponseShiftId(event.target.value); setResponseTeacherId(''); }}><option value="">{responseCourseId ? 'Selecione um turno' : 'Selecione a turma primeiro'}</option>{responseShifts.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label><label className="field">Professor<select value={responseTeacherId} disabled={!responseShiftId} onChange={(event) => setResponseTeacherId(event.target.value)}><option value="">Todos os professores</option>{responseTeachers.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label></div>
           {canViewResponses ? filteredResponses.length ? [...filteredResponses].reverse().map((item) => <article className="response" key={item.id}><div className="response-head"><strong>{item.studentName}</strong><time>{new Date(item.createdAt).toLocaleString('pt-BR')}</time></div><div className="response-meta">{item.courseName} · {item.shiftName} · {item.teacherName}</div><div className="response-body">{item.answers ? Object.values(item.answers).map((answer, index) => answer.value && <div key={`${item.id}-${index}`}><b>{answer.prompt}</b> {answer.type === 'choice' ? '· ' : ': '}{answer.value}</div>) : <>{item.learning && <div><b>Como você avalia seu aprendizado?</b> · {item.learning}</div>}{item.positive && <div><b>O que está funcionando bem no curso?</b>: {item.positive}</div>}{item.support && <div><b>Em que gostaria de receber apoio?</b>: {item.support}</div>}{item.comment && <div><b>Comentário:</b> {item.comment}</div>}</>}</div></article>) : <Empty>{data.responses.length ? 'Nenhuma resposta corresponde à turma e aos filtros selecionados.' : 'Ainda não há respostas nesta turma e turno.'}</Empty> : <Empty>Selecione uma turma e um turno para visualizar as respostas.</Empty>}
         </section>
-        <p className="storage-note"><span>ⓘ</span> Cadastros e respostas são sincronizados pelo Firebase Realtime Database.</p>
         <div className={`toast ${message ? 'show' : ''}`} role="status" aria-live="polite">{message}</div>
       </div>
     </>

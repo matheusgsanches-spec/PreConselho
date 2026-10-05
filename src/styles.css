@@ -145,3 +145,63 @@
 .auth-footnote{font-size:13px}
 @media(max-width:900px){.admin-wrap,.admin-error{margin-left:22px;margin-right:22px}.admin-hero{padding-left:7%;padding-right:7%}.admin-hero h1{font-size:42px}.admin-hero p{font-size:16px}.admin-card{padding:28px}.stat-card{padding:20px}.question-editor-list{grid-template-columns:1fr}}
 @media(max-width:600px){.admin-hero{padding:42px 22px 56px}.admin-hero h1{font-size:36px}.admin-hero p{font-size:15px}.admin-wrap,.admin-error{margin-left:12px;margin-right:12px}.admin-wrap{margin-top:-23px}.stats-row{gap:9px}.stat-card{min-height:94px;padding:15px 11px}.stat-card>span{font-size:11px}.stat-card strong{font-size:25px}.stat-card small{font-size:10px}.admin-grid{gap:15px}.admin-card{padding:25px 20px}.card-title h2{font-size:23px}.card-icon{width:40px;height:40px}.compact-form .field,.question-editor .field{font-size:14px}.compact-form .field input,.compact-form .field select,.responses-filter .field select,.question-editor .field input,.question-editor .field select{min-height:54px;font-size:16px}.compact-form .button,.inline-form .button,.small-button{min-height:50px;font-size:15px}.item-main{font-size:15px}.item-sub{font-size:13px}.responses-filter{padding:16px}.response-head strong{font-size:15px}.response-body{font-size:14px}.auth-card{padding:34px 25px 24px}.auth-card h1{font-size:33px}.auth-card>.field{font-size:14px}.auth-card .field input,.auth-submit{min-height:54px}.question-editor-actions{gap:9px}}
+
+/* Administrative layout inspired by the wide management dashboard reference. */
+body:has(.admin-hero){background:#edf2f7}
+.admin-hero{min-height:300px;padding:46px max(calc((100vw - 1360px)/2),7%) 96px}
+.admin-hero h1{font-size:60px;line-height:1.05;letter-spacing:-1.8px;margin:12px 0}
+.admin-hero p{font-size:21px;line-height:1.55;max-width:900px}
+.admin-hero .eyebrow{font-size:14px;letter-spacing:2px}
+.admin-badge{font-size:15px;font-weight:700;padding:15px 22px}
+.admin-wrap,.admin-error{max-width:1680px}
+.admin-wrap{margin-top:-45px}
+.stats-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-bottom:30px}
+.stat-card{min-height:140px;padding:30px 38px;border-radius:17px;box-shadow:0 14px 36px #132f4b12}
+.stat-card>span{font-size:18px;color:#657b95}
+.stat-card strong{font-size:48px}
+.stat-card small{font-size:16px;color:#8294a8}
+.admin-grid{gap:26px}
+.admin-card{padding:42px;border-radius:18px;border-color:#dfe7ef;box-shadow:0 16px 40px #1734520d}
+.card-title{margin-bottom:28px}
+.card-title h2{font-size:34px;letter-spacing:-.6px}
+.card-title .eyebrow{font-size:13px;letter-spacing:2px}
+.card-icon{width:58px;height:58px;border-radius:13px;font-size:28px}
+.card-help{font-size:17px;line-height:1.65;margin:-4px 0 24px}
+.questions-manager{padding:48px;margin-bottom:26px}
+.questions-manager .card-title{margin-bottom:24px}
+.questions-manager .card-title h2{font-size:38px}
+.questions-manager>.card-help{font-size:18px;max-width:1120px;margin:0 0 25px}
+.question-editor-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.question-editor{padding:26px;border:1px solid #dce5ee;border-radius:14px;background:#f8fafc;box-shadow:inset 0 1px #fff}
+.question-editor-top{padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid #e4ebf2}
+.question-index{font-size:14px;letter-spacing:1.4px;color:#687f98}
+.question-tools{gap:8px}
+.question-tools .icon-button{min-width:40px;min-height:40px;border:1px solid #e0e7ee;border-radius:8px;background:#fff;font-size:16px}
+.question-tools .icon-button:last-child{width:auto;padding:8px 12px;font-size:14px}
+.question-editor .field{font-size:17px;gap:10px;color:#314b66}
+.question-editor .field input,.question-editor .field select{min-height:68px;padding:16px 19px;font-size:18px;font-weight:600;border-radius:10px;border-color:#d5e0eb}
+.question-editor-controls{grid-template-columns:minmax(0,1fr) auto;gap:16px;margin:18px 0}
+.check-field{font-size:16px;gap:10px}
+.check-field input{width:19px;height:19px}
+.question-editor-actions{gap:14px;margin-top:25px}
+.question-editor-actions .button{min-height:56px;padding:15px 20px;font-size:16px}
+.compact-form .field,.responses-filter .field{font-size:16px}
+.compact-form .field input,.compact-form .field select,.responses-filter .field select{min-height:60px;padding:15px 17px;font-size:17px}
+.compact-form .button,.inline-form .button,.small-button{min-height:56px;font-size:16px}
+.item-main{font-size:18px}
+.item-sub{font-size:15px}
+.list-item{padding:20px 0}
+.chip{font-size:15px;padding:11px 15px}
+.responses-filter{grid-template-columns:repeat(3,minmax(0,1fr));padding:24px;gap:20px;background:#f5f8fb;border-color:#e1e8ef;border-radius:13px}
+.response{padding:24px 0}
+.response-head strong{font-size:18px}
+.response-head time,.response-meta{font-size:15px}
+.response-body{font-size:17px;line-height:1.7}
+.empty-state{font-size:18px;padding:40px 0}
+.storage-note{font-size:14px;margin-top:22px}
+@media(max-width:1100px){.admin-hero{padding-left:6%;padding-right:6%}.admin-wrap,.admin-error{margin-left:24px;margin-right:24px}.admin-card{padding:30px}.questions-manager{padding:34px}.questions-manager .card-title h2{font-size:32px}.question-editor{padding:21px}.question-editor .field{font-size:15px}.question-editor .field input,.question-editor .field select{min-height:60px;font-size:16px}}
+@media(max-width:700px){.admin-hero{min-height:0;padding:42px 22px 68px;display:block}.admin-hero h1{font-size:42px}.admin-hero p{font-size:16px}.admin-badge{display:inline-flex;margin-top:18px;font-size:13px}.admin-wrap,.admin-error{margin: -22px 12px 40px}.stats-row{gap:10px;margin-bottom:17px}.stat-card{min-height:104px;padding:15px 12px;border-radius:12px}.stat-card>span{font-size:12px}.stat-card strong{font-size:28px}.stat-card small{font-size:11px}.admin-grid{grid-template-columns:1fr;gap:16px}.admin-card{padding:26px 20px;border-radius:14px}.card-title h2{font-size:25px}.card-icon{width:44px;height:44px}.questions-manager{padding:26px 20px;margin-bottom:17px}.questions-manager .card-title h2{font-size:29px}.questions-manager>.card-help{font-size:15px;line-height:1.6}.question-editor-list{grid-template-columns:1fr;gap:14px}.question-editor{padding:18px;border-radius:12px}.question-editor-top{align-items:flex-start;gap:8px}.question-index{font-size:12px}.question-tools{gap:4px}.question-tools .icon-button{min-width:34px;min-height:34px;padding:5px}.question-tools .icon-button:last-child{padding:5px 8px;font-size:12px}.question-editor .field{font-size:14px}.question-editor .field input,.question-editor .field select{min-height:54px;padding:12px;font-size:15px}.question-editor-controls{grid-template-columns:minmax(0,1fr);gap:8px;margin:14px 0}.check-field{font-size:14px;min-height:38px}.check-field input{width:18px;height:18px}.question-editor-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.question-editor-actions .button{min-height:50px;padding:12px 9px;font-size:13px}.question-editor-actions .primary{grid-column:1/-1}.compact-form .field,.responses-filter .field{font-size:14px}.compact-form .field input,.compact-form .field select,.responses-filter .field select{min-height:52px;font-size:15px}.responses-filter{grid-template-columns:1fr;padding:16px;gap:13px}.response{padding:18px 0}.response-head strong{font-size:15px}.response-head time,.response-meta{font-size:12px}.response-body{font-size:14px}.empty-state{font-size:14px;padding:26px 4px}}
+
+footer{justify-content:center;min-height:76px}
+.footer-brand{position:relative;display:inline-block;padding-right:6px}
+.form-footer{justify-content:flex-end}

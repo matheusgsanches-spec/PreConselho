@@ -31,7 +31,6 @@ export default function App() {
           {(sent || error || sendError) && <div className={`notice ${sent || error || sendError ? 'show' : ''}`} role="status">{error || (sendError ? 'Não foi possível enviar. Confira a conexão com o Firebase e tente novamente.' : 'Obrigado por compartilhar sua experiência. Suas respostas foram enviadas com sucesso.')}</div>}
         </section>
       </main>
-      <footer><span className="footer-brand">SENAI</span><span>Educação que transforma. {new Date().getFullYear()}</span><span>Pré-Conselho</span></footer>
     </>
   );
 }
