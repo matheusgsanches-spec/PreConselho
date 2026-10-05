@@ -17,3 +17,131 @@
 @media(max-width:900px){.hero{min-height:370px;padding-left:7%;padding-right:7%}.hero h1{font-size:46px}.hero-art{transform:scale(.9);transform-origin:right center;margin-left:-20px}.content-wrap{margin-left:22px;margin-right:22px}.form-card{padding:34px 32px}}
 @media(max-width:600px){.topbar{height:64px;padding:0 18px}.brand-word{font-size:26px}.brand-divider{margin:0 10px}.brand-caption{font-size:9px;letter-spacing:1px}.hero{min-height:285px;padding:38px 22px 42px}.hero h1{font-size:34px;line-height:1.12;letter-spacing:-1px;margin:11px 0}.hero-copy p{font-size:13px;line-height:1.65;max-width:320px}.hero .eyebrow{font-size:9px}.hero-art{width:230px;height:180px;right:-82px;bottom:-45px;transform:scale(.78);opacity:.13;margin:0}.content-wrap{margin:-18px 12px 38px}.form-card{padding:24px 18px 21px;border-radius:12px}.section-heading{gap:11px;margin-bottom:21px}.section-heading h2{font-size:18px;line-height:1.3}.section-heading p{font-size:12px}.step{width:36px;height:36px;flex-basis:36px;font-size:11px}.form-grid{grid-template-columns:minmax(0,1fr);gap:15px}.span-2{grid-column:span 1}.field{font-size:13px;gap:8px}.field input,.field select,.field textarea{min-height:49px;padding:12px;font-size:15px}.field textarea{min-height:92px}.question-heading{margin-top:30px}.question legend{font-size:13px;line-height:1.5}.rating-options{grid-template-columns:1fr 1fr;gap:8px}.rating{min-height:48px;padding:10px;font-size:11px;gap:7px}.face{font-size:16px}.dynamic-questions{gap:19px}.form-footer{align-items:stretch;flex-direction:column;gap:13px;margin-top:22px;padding-top:19px}.form-footer p{font-size:11px;line-height:1.5}.form-footer .button{width:100%;min-height:49px}.form-footer .button span{margin-left:auto}#studentView>.notice{margin:-30px 12px 38px}.footer-brand{font-size:15px}footer{font-size:10px}}
 @media(max-width:360px){.hero{padding-left:18px;padding-right:18px}.hero h1{font-size:31px}.content-wrap{margin-left:8px;margin-right:8px}.form-card{padding-left:14px;padding-right:14px}.rating-options{grid-template-columns:1fr}}
+
+/* Student screen: larger type and controls for clear reading at a glance. */
+.hero{min-height:470px;padding-top:72px;padding-bottom:72px}
+.hero-copy{max-width:680px}
+.hero h1{font-size:60px;max-width:680px}
+.hero-copy p{font-size:18px;max-width:620px}
+.hero .eyebrow{font-size:12px}
+.hero-art{width:390px;height:310px;transform:scale(1.08)}
+.content-wrap{max-width:1200px;margin-top:-38px}
+.form-card{padding:48px 54px 44px}
+.section-heading h2{font-size:27px}
+.section-heading p{font-size:16px}
+.step{width:48px;height:48px;flex-basis:48px;font-size:14px}
+.form-grid{gap:23px 26px}
+.field{font-size:16px;gap:10px}
+.field input,.field select,.field textarea{min-height:60px;padding:15px 17px;font-size:17px}
+.field textarea{min-height:112px}
+.question legend{font-size:17px}
+.rating{min-height:60px;padding:15px;font-size:15px}
+.face{font-size:21px}
+.dynamic-questions{gap:26px}
+.form-footer .button{min-height:56px;padding:16px 22px;font-size:16px}
+@media(max-width:900px){.hero{min-height:410px}.hero h1{font-size:52px}.hero-art{transform:scale(.92)}.content-wrap{margin-top:-30px}.form-card{padding:40px 36px}.field input,.field select,.field textarea{min-height:56px}}
+@media(max-width:600px){.hero{min-height:330px;padding:42px 22px 50px}.hero h1{font-size:39px;max-width:440px}.hero-copy p{font-size:15px;max-width:370px}.hero .eyebrow{font-size:10px}.hero-art{transform:scale(.76);opacity:.16}.content-wrap{margin:-22px 12px 40px}.form-card{padding:29px 21px 25px}.section-heading h2{font-size:21px}.section-heading p{font-size:13px}.step{width:40px;height:40px;flex-basis:40px;font-size:12px}.field{font-size:14px}.field input,.field select,.field textarea{min-height:54px;padding:13px 14px;font-size:16px}.question legend{font-size:14px}.rating{min-height:52px;font-size:12px}.form-footer .button{min-height:54px;font-size:15px}}
+@media(max-width:360px){.hero{padding-left:18px;padding-right:18px}.hero h1{font-size:35px}.content-wrap{margin-left:8px;margin-right:8px}.form-card{padding-left:16px;padding-right:16px}}
+
+/* Administrative screens: match the larger, clearer student experience. */
+.admin-hero{min-height:250px;padding-top:52px;padding-bottom:62px}
+.admin-hero h1{font-size:42px;letter-spacing:-1px}
+.admin-hero p{font-size:16px;line-height:1.7;max-width:620px}
+.admin-hero .eyebrow{font-size:11px}
+.admin-badge{font-size:13px;padding:12px 17px}
+.admin-wrap,.admin-error{max-width:1200px}
+.admin-wrap{margin-top:-30px}
+.stats-row{gap:18px;margin-bottom:20px}
+.stat-card{padding:22px 25px;min-height:94px}
+.stat-card>span{font-size:13px}
+.stat-card strong{font-size:32px}
+.stat-card small{font-size:12px}
+.admin-grid{gap:20px}
+.admin-card{padding:30px}
+.card-title{margin-bottom:23px}
+.card-title h2{font-size:24px}
+.card-icon{width:40px;height:40px;font-size:23px}
+.compact-form{gap:16px;padding-bottom:20px}
+.compact-form .field,.question-editor .field{font-size:13px}
+.compact-form .field input,.compact-form .field select,.responses-filter .field select,.question-editor .field input,.question-editor .field select{min-height:48px;padding:11px 13px;font-size:14px}
+.compact-form .button,.inline-form .button,.small-button{min-height:44px;padding:12px 16px;font-size:13px}
+.list-item{padding:15px 0}
+.item-main{font-size:14px}
+.item-sub{font-size:12px}
+.icon-button{font-size:13px;padding:8px}
+.chip{padding:8px 11px;font-size:12px}
+.card-help{font-size:13px}
+.responses-filter{gap:14px;padding:18px}
+.responses-filter .field{font-size:12px}
+.response{padding:18px 0}
+.response-head strong{font-size:14px}
+.response-head time,.response-meta{font-size:12px}
+.response-body{font-size:13px;gap:7px}
+.empty-state{font-size:14px;padding:28px 0}
+.storage-note{font-size:12px}
+.question-editor-list{gap:14px}
+.question-editor{padding:18px}
+.question-index{font-size:11px}
+.check-field{font-size:12px;min-height:42px}
+.question-editor-actions{gap:10px}
+.section-subtitle{font-size:13px}
+.auth-card{width:min(100%,500px);padding:44px 46px 30px;border-radius:16px}
+.auth-brand{margin-bottom:42px}
+.auth-card h1{font-size:36px}
+.auth-card>p{font-size:15px}
+.auth-card>.field{font-size:14px}
+.auth-card .field input,.auth-submit{min-height:52px;font-size:15px}
+.auth-footnote{font-size:12px}
+@media(max-width:900px){.admin-wrap,.admin-error{margin-left:22px;margin-right:22px}.admin-hero{padding-left:7%;padding-right:7%}.admin-grid{gap:16px}.admin-card{padding:24px}.stat-card{padding:18px}.question-editor-list{grid-template-columns:1fr}}
+@media(max-width:600px){.admin-hero{min-height:0;padding:38px 22px 52px}.admin-hero h1{font-size:33px}.admin-hero p{font-size:14px}.admin-badge{display:none}.admin-wrap,.admin-error{margin-left:12px;margin-right:12px}.admin-wrap{margin-top:-20px;margin-bottom:40px}.stats-row{gap:8px}.stat-card{padding:13px 10px;min-height:86px}.stat-card>span{font-size:10px}.stat-card strong{font-size:23px}.stat-card small{font-size:10px}.admin-grid{grid-template-columns:1fr;gap:13px}.admin-card{padding:22px 18px}.card-title h2{font-size:21px}.card-icon{width:36px;height:36px}.compact-form .field,.question-editor .field{font-size:13px}.compact-form .field input,.compact-form .field select,.responses-filter .field select,.question-editor .field input,.question-editor .field select{min-height:50px;font-size:15px}.compact-form .button,.inline-form .button,.small-button{min-height:46px;font-size:14px}.item-main{font-size:14px}.item-sub{font-size:12px}.responses-filter{grid-template-columns:1fr;padding:14px;gap:12px}.response-head{flex-direction:column;gap:5px}.response-head strong{font-size:14px}.response-body{font-size:13px}.auth-screen{padding:16px}.auth-card{width:min(100%,480px);padding:30px 24px 22px}.auth-card h1{font-size:30px}.auth-brand{margin-bottom:34px}.auth-card>.field{font-size:13px}.auth-card .field input,.auth-submit{min-height:50px}.question-editor-actions .primary{width:100%}.inline-form{grid-template-columns:minmax(0,1fr) auto;gap:10px}}
+
+/* Larger administrative type scale and touch controls. */
+.admin-hero{min-height:285px;padding-top:60px;padding-bottom:70px}
+.admin-hero h1{font-size:48px}
+.admin-hero p{font-size:18px;max-width:700px}
+.admin-hero .eyebrow{font-size:12px}
+.admin-wrap,.admin-error{max-width:1320px}
+.admin-wrap{margin-top:-36px}
+.stats-row{gap:22px;margin-bottom:24px}
+.stat-card{min-height:112px;padding:26px 30px}
+.stat-card>span{font-size:15px}
+.stat-card strong{font-size:38px}
+.stat-card small{font-size:13px}
+.admin-grid{gap:24px}
+.admin-card{padding:36px}
+.card-title{margin-bottom:27px}
+.card-title h2{font-size:28px}
+.card-icon{width:46px;height:46px;font-size:25px}
+.compact-form{gap:19px;padding-bottom:24px}
+.compact-form .field,.question-editor .field{font-size:15px}
+.compact-form .field input,.compact-form .field select,.responses-filter .field select,.question-editor .field input,.question-editor .field select{min-height:56px;padding:13px 15px;font-size:16px}
+.compact-form .button,.inline-form .button,.small-button{min-height:50px;padding:14px 18px;font-size:15px}
+.list-item{padding:18px 0}
+.item-main{font-size:16px}
+.item-sub{font-size:14px}
+.icon-button{min-width:36px;min-height:36px;font-size:14px}
+.chip{padding:9px 13px;font-size:13px}
+.card-help{font-size:14px}
+.responses-filter{gap:16px;padding:21px}
+.responses-filter .field{font-size:13px}
+.response{padding:21px 0}
+.response-head strong{font-size:16px}
+.response-head time,.response-meta{font-size:13px}
+.response-body{font-size:15px;gap:9px}
+.empty-state{font-size:16px;padding:34px 0}
+.storage-note{font-size:13px}
+.question-editor-list{gap:17px}
+.question-editor{padding:21px}
+.question-index{font-size:12px}
+.check-field{font-size:13px;min-height:46px}
+.question-editor-actions{gap:12px;margin-top:18px}
+.section-subtitle{font-size:14px}
+.auth-card{width:min(100%,560px);padding:50px 54px 34px}
+.auth-brand{margin-bottom:46px}
+.auth-card h1{font-size:40px}
+.auth-card>p{font-size:16px}
+.auth-card>.field{font-size:15px}
+.auth-card .field input,.auth-submit{min-height:58px;font-size:16px}
+.auth-footnote{font-size:13px}
+@media(max-width:900px){.admin-wrap,.admin-error{margin-left:22px;margin-right:22px}.admin-hero{padding-left:7%;padding-right:7%}.admin-hero h1{font-size:42px}.admin-hero p{font-size:16px}.admin-card{padding:28px}.stat-card{padding:20px}.question-editor-list{grid-template-columns:1fr}}
+@media(max-width:600px){.admin-hero{padding:42px 22px 56px}.admin-hero h1{font-size:36px}.admin-hero p{font-size:15px}.admin-wrap,.admin-error{margin-left:12px;margin-right:12px}.admin-wrap{margin-top:-23px}.stats-row{gap:9px}.stat-card{min-height:94px;padding:15px 11px}.stat-card>span{font-size:11px}.stat-card strong{font-size:25px}.stat-card small{font-size:10px}.admin-grid{gap:15px}.admin-card{padding:25px 20px}.card-title h2{font-size:23px}.card-icon{width:40px;height:40px}.compact-form .field,.question-editor .field{font-size:14px}.compact-form .field input,.compact-form .field select,.responses-filter .field select,.question-editor .field input,.question-editor .field select{min-height:54px;font-size:16px}.compact-form .button,.inline-form .button,.small-button{min-height:50px;font-size:15px}.item-main{font-size:15px}.item-sub{font-size:13px}.responses-filter{padding:16px}.response-head strong{font-size:15px}.response-body{font-size:14px}.auth-card{padding:34px 25px 24px}.auth-card h1{font-size:33px}.auth-card>.field{font-size:14px}.auth-card .field input,.auth-submit{min-height:54px}.question-editor-actions{gap:9px}}
