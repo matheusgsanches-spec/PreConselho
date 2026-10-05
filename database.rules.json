@@ -1,0 +1,61 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "admins": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": false
+      }
+    },
+    "courses": {
+      ".read": true,
+      "$id": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+        ".validate": "newData.hasChildren(['name']) && newData.child('name').isString() && newData.child('name').val().length <= 100",
+        "name": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "$other": { ".validate": false }
+      }
+    },
+    "shifts": {
+      ".read": true,
+      "$id": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+        ".validate": "newData.hasChildren(['name']) && newData.child('name').isString() && newData.child('name').val().length <= 40",
+        "name": { ".validate": "newData.isString() && newData.val().length <= 40" },
+        "$other": { ".validate": false }
+      }
+    },
+    "teachers": {
+      ".read": true,
+      "$id": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).val() === true",
+        ".validate": "newData.hasChildren(['name', 'courseId', 'shiftId']) && newData.child('name').isString() && newData.child('name').val().length <= 100 && root.child('courses').child(newData.child('courseId').val()).exists() && root.child('shifts').child(newData.child('shiftId').val()).exists()",
+        "name": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "courseId": { ".validate": "newData.isString()" },
+        "shiftId": { ".validate": "newData.isString()" },
+        "$other": { ".validate": false }
+      }
+    },
+    "responses": {
+      ".read": "auth != null && root.child('admins').child(auth.uid).val() === true",
+      "$id": {
+        ".write": "(auth != null && root.child('admins').child(auth.uid).val() === true) || (!data.exists() && newData.exists() && newData.child('studentName').isString() && newData.child('studentName').val().length > 0 && newData.child('studentName').val().length <= 100 && (newData.child('learning').val() === 'Muito bom' || newData.child('learning').val() === 'Bom' || newData.child('learning').val() === 'Regular' || newData.child('learning').val() === 'Preciso de ajuda') && newData.child('positive').isString() && newData.child('positive').val().length <= 1000 && newData.child('support').isString() && newData.child('support').val().length <= 1000 && newData.child('comment').isString() && newData.child('comment').val().length <= 1000 && newData.child('createdAt').isString() && root.child('courses').child(newData.child('courseId').val()).exists() && root.child('shifts').child(newData.child('shiftId').val()).exists() && root.child('teachers').child(newData.child('teacherId').val()).child('courseId').val() === newData.child('courseId').val() && root.child('teachers').child(newData.child('teacherId').val()).child('shiftId').val() === newData.child('shiftId').val() && root.child('teachers').child(newData.child('teacherId').val()).child('name').val() === newData.child('teacherName').val() && root.child('courses').child(newData.child('courseId').val()).child('name').val() === newData.child('courseName').val() && root.child('shifts').child(newData.child('shiftId').val()).child('name').val() === newData.child('shiftName').val())",
+        ".validate": "newData.hasChildren(['studentName', 'courseId', 'shiftId', 'teacherId', 'courseName', 'shiftName', 'teacherName', 'learning', 'positive', 'support', 'comment', 'createdAt'])",
+        "studentName": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 100" },
+        "courseId": { ".validate": "newData.isString()" },
+        "shiftId": { ".validate": "newData.isString()" },
+        "teacherId": { ".validate": "newData.isString()" },
+        "courseName": { ".validate": "newData.isString()" },
+        "shiftName": { ".validate": "newData.isString()" },
+        "teacherName": { ".validate": "newData.isString()" },
+        "learning": { ".validate": "newData.isString() && (newData.val() === 'Muito bom' || newData.val() === 'Bom' || newData.val() === 'Regular' || newData.val() === 'Preciso de ajuda')" },
+        "positive": { ".validate": "newData.isString() && newData.val().length <= 1000" },
+        "support": { ".validate": "newData.isString() && newData.val().length <= 1000" },
+        "comment": { ".validate": "newData.isString() && newData.val().length <= 1000" },
+        "createdAt": { ".validate": "newData.isString()" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}
