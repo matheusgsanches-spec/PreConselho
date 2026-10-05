@@ -28,7 +28,7 @@ O painel administrativo roda em `http://localhost:5174/admin.html`. Os servidore
 5. No Realtime Database, crie manualmente `admins/{UID_DA_CONTA}` com valor booleano `true`. O UID está na área Authentication. Somente contas com esse valor entram no painel.
 6. Reinicie os servidores Vite depois de preencher `.env.local`.
 
-O app lê os nós `courses`, `shifts`, `teachers` e `responses` em tempo real. O aluno pode ler os catálogos e enviar respostas; somente contas autorizadas em `admins` podem administrar os catálogos e ler respostas. As regras validam os vínculos de professor, curso e turno.
+O app lê os nós `courses`, `shifts`, `teachers`, `questions` e `responses` em tempo real. O aluno pode ler os catálogos e as perguntas e enviar respostas; somente contas autorizadas em `admins` podem administrar cadastros e perguntas, além de ler respostas. No painel, perguntas abertas e de múltipla escolha podem ser editadas, adicionadas e removidas. A consulta de respostas exige selecionar turma/curso e turno, com professor opcional; o CSV respeita os filtros. As regras validam os vínculos de professor, curso e turno.
 
 Para compilar as duas aplicações para produção:
 

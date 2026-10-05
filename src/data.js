@@ -17,6 +17,12 @@ export const initialData = {
     { id: 't3', name: 'Mariana Costa', courseId: 'c2', shiftId: 's2' },
     { id: 't4', name: 'Rafael Souza', courseId: 'c3', shiftId: 's3' },
   ],
+  questions: [
+    { id: 'learning', order: 0, prompt: 'Como você avalia seu aprendizado até agora?', type: 'choice', required: true, options: ['Muito bom', 'Bom', 'Regular', 'Preciso de ajuda'] },
+    { id: 'positive', order: 1, prompt: 'O que está funcionando bem no curso?', type: 'text', required: false, options: [] },
+    { id: 'support', order: 2, prompt: 'Em que você gostaria de receber mais apoio?', type: 'text', required: false, options: [] },
+    { id: 'comment', order: 3, prompt: 'Quer deixar mais algum comentário?', type: 'text', required: false, options: [] },
+  ],
   responses: [],
 };
 
@@ -24,7 +30,7 @@ export function readData() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (saved && ['courses', 'shifts', 'teachers', 'responses'].every((key) => Array.isArray(saved[key]))) {
-      return saved;
+      return { ...structuredClone(initialData), ...saved, questions: Array.isArray(saved.questions) ? saved.questions : structuredClone(initialData.questions) };
     }
   } catch {
     // Dados ausentes ou inválidos: inicia com os exemplos locais.
@@ -38,11 +44,15 @@ export function makeId() {
 
 export function downloadResponses(responses) {
   if (!responses.length) return false;
-  const columns = ['Data', 'Aluno', 'Curso', 'Turno', 'Professor', 'Aprendizado', 'Pontos positivos', 'Apoio necessário', 'Comentário'];
+  const questionMap = new Map(initialData.questions.map((question) => [question.id, question.prompt]));
+  responses.forEach((item) => Object.entries(item.answers ?? {}).forEach(([id, answer]) => questionMap.set(id, answer.prompt)));
+  const questions = [...questionMap.entries()];
+  const questionLabels = questions.map(([, prompt]) => prompt);
+  const columns = ['Data', 'Aluno', 'Curso', 'Turno', 'Professor', ...questionLabels];
   const cell = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`;
   const rows = responses.map((item) => [
     new Date(item.createdAt).toLocaleString('pt-BR'), item.studentName, item.courseName,
-    item.shiftName, item.teacherName, item.learning, item.positive, item.support, item.comment,
+    item.shiftName, item.teacherName, ...questions.map(([id, label]) => item.answers?.[id]?.value ?? legacyAnswer(item, label)),
   ]);
   const csv = '\ufeff' + [columns, ...rows].map((row) => row.map(cell).join(';')).join('\r\n');
   const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
@@ -52,4 +62,14 @@ export function downloadResponses(responses) {
   link.click();
   URL.revokeObjectURL(url);
   return true;
+}
+
+function legacyAnswer(item, label) {
+  const legacy = {
+    'Como você avalia seu aprendizado até agora?': item.learning,
+    'O que está funcionando bem no curso?': item.positive,
+    'Em que você gostaria de receber mais apoio?': item.support,
+    'Quer deixar mais algum comentário?': item.comment,
+  };
+  return legacy[label] ?? '';
 }
