@@ -11,11 +11,17 @@ function normalizeCollection(snapshot) {
 export function useSharedData(enabled = true) {
   const [data, setData] = useState(() => firebaseConfigured
     ? { ...structuredClone(initialData), courses: [], shifts: [], teachers: [], responses: [] }
-    : readData());
+    : import.meta.env.PROD
+      ? { ...structuredClone(initialData), courses: [], shifts: [], teachers: [], responses: [] }
+      : readData());
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (!firebaseConfigured) {
+      if (import.meta.env.PROD) {
+        setError('Este site ainda não está conectado ao Firebase. Configure as variáveis VITE_FIREBASE_* na Vercel e publique uma nova versão.');
+        return undefined;
+      }
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch { /* Armazenamento local opcional. */ }
       return undefined;
     }

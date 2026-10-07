@@ -10,7 +10,7 @@ export default function StudentForm({ data, onSubmit }) {
     teacher.courseId === courseId && teacher.shiftId === shiftId,
   ), [data, courseId, shiftId]);
 
-  function submit(event) {
+  async function submit(event) {
     event.preventDefault();
     const form = event.currentTarget;
     const fields = new FormData(form);
@@ -23,16 +23,17 @@ export default function StudentForm({ data, onSubmit }) {
       type: question.type,
       value: String(fields.get(`answer-${question.id}`) ?? '').trim(),
     }]));
-    onSubmit({
+    const saved = await onSubmit({
       studentName: String(fields.get('studentName')).trim(),
       courseId,
       shiftId,
       teacherId: teacher.id,
       courseName: course.name,
-      shiftName: shift.name,
+      shiftName: shift.databaseName ?? shift.name,
       teacherName: teacher.name,
       answers,
     });
+    if (!saved) return;
     form.reset();
     setCourseId('');
     setShiftId('');

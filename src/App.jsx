@@ -12,10 +12,12 @@ export default function App() {
       setSendError(false);
       setSent(true);
       window.setTimeout(() => setSent(false), 6000);
+      return true;
     } catch {
       setSent(false);
       setSendError(true);
       window.setTimeout(() => setSendError(false), 6000);
+      return false;
     }
   }
 

@@ -36,7 +36,7 @@ export function normalizeShifts(shifts = []) {
   const normalize = (value) => String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLocaleLowerCase('pt-BR');
   return standardShifts.map((standard) => {
     const existing = shifts.find((shift) => standard.aliases.includes(normalize(shift.name)));
-    return { id: existing?.id ?? standard.id, name: standard.name };
+    return { id: existing?.id ?? standard.id, name: standard.name, databaseName: existing?.name ?? standard.name };
   });
 }
 
