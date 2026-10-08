@@ -6,7 +6,7 @@ import { auth, db, firebaseConfigured } from './firebase.js';
 import { useSharedData } from './useSharedData.js';
 
 function AdminWorkspace({ user, onLogout }) {
-  const { data, actions, error } = useSharedData(true);
+  const { data, actions, error } = useSharedData(true, true);
   return <>
     <header className="topbar">
       <a className="brand" href="/admin.html" aria-label="SENAI Administração"><span className="brand-word">SENAI<span className="brand-mark" /></span><span className="brand-divider" /><span className="brand-caption">PRÉ-CONSELHO · ADMIN</span></a>

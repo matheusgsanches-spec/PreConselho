@@ -8,7 +8,7 @@ function normalizeCollection(snapshot) {
   return Object.entries(value).map(([id, item]) => ({ id, ...item }));
 }
 
-export function useSharedData(enabled = true) {
+export function useSharedData(enabled = true, includeResponses = false) {
   const [data, setData] = useState(() => firebaseConfigured
     ? { ...structuredClone(initialData), courses: [], shifts: [], teachers: [], responses: [] }
     : import.meta.env.PROD
@@ -26,7 +26,9 @@ export function useSharedData(enabled = true) {
       return undefined;
     }
     if (!enabled) return undefined;
-    const names = ['courses', 'shifts', 'teachers', 'responses', 'questions'];
+    const names = includeResponses
+      ? ['courses', 'shifts', 'teachers', 'responses', 'questions']
+      : ['courses', 'shifts', 'teachers', 'questions'];
     const unsubscribers = names.map((name) => onValue(
       ref(db, name),
       (snapshot) => setData((current) => {
@@ -41,7 +43,7 @@ export function useSharedData(enabled = true) {
       () => setError('Não foi possível carregar os dados. Confira a conexão Firebase e as regras do Realtime Database.'),
     ));
     return () => unsubscribers.forEach((unsubscribe) => unsubscribe());
-  }, [enabled]);
+  }, [enabled, includeResponses]);
 
   const actions = useMemo(() => {
     const persistAdd = async (name, item) => {
