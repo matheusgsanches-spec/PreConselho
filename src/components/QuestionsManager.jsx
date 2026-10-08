@@ -44,7 +44,7 @@ export default function QuestionsManager({ initialQuestions, onSave, notify }) {
     } finally { setSaving(false); }
   }
 
-  return <section className="admin-card questions-manager">
+  return <section className="admin-card questions-manager" id="admin-questions">
     <div className="card-title"><div><span className="eyebrow">FORMULÁRIO DO ALUNO</span><h2>Configurar perguntas</h2></div><span className="card-icon blue">✎</span></div>
     <p className="card-help">Edite os enunciados, escolha respostas abertas ou de múltipla escolha e defina quais são obrigatórias.</p>
     <form onSubmit={save}>
