@@ -25,10 +25,10 @@ export default function AdminPanel({ data, actions }) {
   const [guideOpen, setGuideOpen] = useState(false);
   const [guideSearch, setGuideSearch] = useState('');
   const guideTopics = [
-    { title: 'Configurar perguntas', description: 'Editar, adicionar e organizar as perguntas do aluno.', target: 'admin-questions' },
-    { title: 'Cadastrar cursos', description: 'Adicionar e remover cursos disponíveis.', target: 'admin-courses' },
-    { title: 'Cadastrar professores', description: 'Vincular professor a um curso e turno.', target: 'admin-teachers' },
-    { title: 'Consultar respostas', description: 'Filtrar por curso, turno e professor e exportar CSV.', target: 'admin-responses' },
+    { step: 1, title: 'Configurar perguntas', description: 'Editar, adicionar e organizar as perguntas do aluno.', target: 'admin-questions' },
+    { step: 2, title: 'Cadastrar cursos', description: 'Adicionar e remover cursos disponíveis.', target: 'admin-courses' },
+    { step: 3, title: 'Cadastrar professores', description: 'Vincular professor a um curso e turno.', target: 'admin-teachers' },
+    { step: 4, title: 'Consultar respostas', description: 'Filtrar por curso, turno e professor e exportar CSV.', target: 'admin-responses' },
   ];
   const normalizedGuideSearch = guideSearch.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR');
   const visibleGuideTopics = guideTopics.filter((topic) => `${topic.title} ${topic.description}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR').includes(normalizedGuideSearch));
@@ -65,7 +65,7 @@ export default function AdminPanel({ data, actions }) {
 
   return (
     <>
-      <div className="admin-hero"><div className="admin-guide-wrap"><button className="admin-guide-trigger" type="button" aria-expanded={guideOpen} aria-controls="admin-guide-menu" onClick={() => setGuideOpen((open) => !open)}><span className="guide-arrows" aria-hidden="true"></span><span>Guia do painel</span></button>{guideOpen && <div className="admin-guide-menu" id="admin-guide-menu"><label className="field">Pesquisar funcao<input type="search" autoFocus value={guideSearch} onChange={(event) => setGuideSearch(event.target.value)} placeholder="Ex.: cadastrar professor" /></label><nav aria-label="Funcoes administrativas">{visibleGuideTopics.length ? visibleGuideTopics.map((topic) => <a key={topic.target} href={`#${topic.target}`} onClick={() => setGuideOpen(false)}><strong>{topic.title}</strong><span>{topic.description}</span></a>) : <p>Nenhuma funcao encontrada.</p>}</nav></div>}</div><div className="admin-hero-copy"><span className="eyebrow">PAINEL DE GESTÃO</span><h1>Administração</h1><p>Organize os vínculos da sua unidade e acompanhe as respostas do pré-conselho.</p></div><div className="admin-badge">SENAI <span>•</span> Gestão pedagógica</div></div>
+      <div className="admin-hero"><div className="admin-guide-wrap"><button className="admin-guide-trigger" type="button" aria-expanded={guideOpen} aria-controls="admin-guide-menu" onClick={() => setGuideOpen((open) => !open)}><span>Guia do painel</span></button>{guideOpen && <div className="admin-guide-menu" id="admin-guide-menu"><label className="field">Pesquisar funcao<input type="search" autoFocus value={guideSearch} onChange={(event) => setGuideSearch(event.target.value)} placeholder="Ex.: cadastrar professor" /></label><nav aria-label="Funcoes administrativas">{visibleGuideTopics.length ? visibleGuideTopics.map((topic) => <a key={topic.target} href={`#${topic.target}`} onClick={() => setGuideOpen(false)}><span className="guide-step">{topic.step}</span><span className="guide-topic-copy"><strong>{topic.title}</strong><span>{topic.description}</span></span></a>) : <p>Nenhuma funcao encontrada.</p>}</nav></div>}</div><div className="admin-hero-copy"><span className="eyebrow">PAINEL DE GESTÃO</span><h1>Administração</h1><p>Organize os vínculos da sua unidade e acompanhe as respostas do pré-conselho.</p></div><div className="admin-badge">SENAI <span>•</span> Gestão pedagógica</div></div>
       <div className="admin-wrap">
         <QuestionsManager initialQuestions={data.questions} onSave={actions.saveQuestions} notify={announce} />
         <div className="admin-sections">
