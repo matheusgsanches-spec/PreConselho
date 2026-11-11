@@ -44,7 +44,7 @@ export default function StudentForm({ data, onSubmit }) {
       <form className="form-card" onSubmit={submit}>
         <div className="section-heading"><div className="step">01</div><div><h2>Identifique sua turma</h2><p>As opções dependem dos vínculos cadastrados pela administração.</p></div></div>
         <div className="form-grid">
-          <label className="field span-2">Seu nome<input name="studentName" required maxLength="100" placeholder="Nome completo" /></label>
+          <label className="field span-2">Seu nome<input name="studentName" maxLength="100" placeholder="Nome completo" /></label>
           <label className="field">Curso<select name="courseId" value={courseId} required onChange={(event) => { setCourseId(event.target.value); setShiftId(''); }}><option value="">{data.courses.length ? 'Selecione o curso' : 'Nenhum curso cadastrado'}</option>{data.courses.map((course) => <option key={course.id} value={course.id}>{course.name}</option>)}</select></label>
           <label className="field">Turno<select name="shiftId" value={shiftId} required disabled={!courseId || !shifts.length} onChange={(event) => setShiftId(event.target.value)}><option value="">{!courseId ? 'Selecione primeiro o curso' : shifts.length ? 'Selecione o turno' : 'Sem turnos disponíveis'}</option>{shifts.map((shift) => <option key={shift.id} value={shift.id}>{shift.name}</option>)}</select></label>
           <label className="field span-2">Professor(a)<select name="teacherId" required disabled={!shiftId || !teachers.length}><option value="">{!shiftId ? 'Selecione primeiro o turno' : 'Selecione o professor'}</option>{teachers.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
